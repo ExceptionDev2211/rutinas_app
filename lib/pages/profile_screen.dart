@@ -30,7 +30,7 @@ class ProfileScreen extends StatelessWidget {
               'Email: juan.perez@example.com',
               style: TextStyle(fontSize: 16),
             ),
-            const SizedBox(height: 20),
+            const SizedBox(height: 21),
             ElevatedButton(
               onPressed: () {},
               child: Text('Editar Perfil'),
