@@ -47,7 +47,7 @@ class HomeScreen extends StatelessWidget {
                         const RutinesPage(routineName: 'Brazos'),
                   ),
                 );
-              },
+              }, 
               //imagePath: "rutinas_app/lib/images/brazo.png",
             ),
             RoutineCard(
@@ -77,7 +77,7 @@ class HomeScreen extends StatelessWidget {
                         const RutinesPage(routineName: 'Hombros'),
                   ),
                 );
-              },
+              }, 
               //imagePath: "rutinas_app/lib/images/brazo.png",
             ),
           ],
@@ -89,14 +89,15 @@ class HomeScreen extends StatelessWidget {
             icon: Icon(Icons.fitness_center),
             label: 'Rutinas',
           ),
+          
+          BottomNavigationBarItem(
+            icon: Icon(Icons.calendar_month),
+            label: 'Calendario',
+          ),
           BottomNavigationBarItem(
             icon: Icon(Icons.person),
             label: 'Perfil',
           ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.calendar_month),
-            label: 'Calendario',
-          )
         ],
         currentIndex: 0,
         selectedItemColor: Colors.blueAccent,
@@ -108,13 +109,13 @@ class HomeScreen extends StatelessWidget {
             case 1:
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const ProfileScreen()),
+                MaterialPageRoute(builder: (context) => const CalendarScreen()),
               );
               break;
             case 2:
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const CalendarScreen()),
+                MaterialPageRoute(builder: (context) => const ProfileScreen()),
               );
               break;
           }

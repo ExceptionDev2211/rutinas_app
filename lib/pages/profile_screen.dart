@@ -16,8 +16,9 @@ class ProfileScreen extends StatelessWidget {
           children: <Widget>[
             const Center(
               child: CircleAvatar(
-                radius: 50,
-                backgroundImage: AssetImage('assets/profile_picture.png'),
+                radius: 70,
+                //backgroundImage: AssetImage('assets/images/brazo.jpg'),
+                backgroundImage: NetworkImage('https://cdn-icons-png.flaticon.com/512/2919/2919906.png'),
               ),
             ),
             const SizedBox(height: 20),
@@ -33,7 +34,7 @@ class ProfileScreen extends StatelessWidget {
             const SizedBox(height: 21),
             ElevatedButton(
               onPressed: () {},
-              child: Text('Editar Perfil'),
+              child: const Text('Editar Perfil'),
             ),
             const SizedBox(height: 20),
           const Text(
