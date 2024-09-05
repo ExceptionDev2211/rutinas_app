@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:rutinas_app/pages/calendar_screen.dart';
 import '../widgets/routine_card.dart';
 import 'profile_screen.dart';
 import 'routines_screen.dart';
@@ -21,51 +22,63 @@ class HomeScreen extends StatelessWidget {
           children: [
             RoutineCard(
               title: 'Abdominales',
-              description: 'Rutina para fortalecer y definir el abdomen. Incluye crunches, elevaciones de piernas y planchas.',
+              description:
+                  'Rutina para fortalecer y definir el abdomen. Incluye crunches, elevaciones de piernas y planchas.',
               onTap: () {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => const RutinesPage(routineName: 'Abdominales'),
+                    builder: (context) =>
+                        const RutinesPage(routineName: 'Abdominales'),
                   ),
                 );
               },
+              //imagePath: "rutinas_app/lib/images/brazo.png",
             ),
             RoutineCard(
               title: 'Brazos',
-              description: 'Entrenamiento para tonificar los músculos de los brazos. Ejercicios incluyen flexiones, bíceps con mancuernas y tríceps en banco.',
+              description:
+                  'Entrenamiento para tonificar los músculos de los brazos. Ejercicios incluyen flexiones, bíceps con mancuernas y tríceps en banco.',
               onTap: () {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => const RutinesPage(routineName: 'Brazos'),
+                    builder: (context) =>
+                        const RutinesPage(routineName: 'Brazos'),
                   ),
                 );
               },
+              //imagePath: "rutinas_app/lib/images/brazo.png",
             ),
             RoutineCard(
               title: 'Piernas',
-              description: 'Rutina para fortalecer y esculpir las piernas. Incluye sentadillas, lunges y extensiones de piernas.',
+              description:
+                  'Rutina para fortalecer y esculpir las piernas. Incluye sentadillas, lunges y extensiones de piernas.',
               onTap: () {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => const RutinesPage(routineName: 'Piernas'),
+                    builder: (context) =>
+                        const RutinesPage(routineName: 'Piernas'),
                   ),
                 );
               },
+              //imagePath: "rutinas_app/lib/images/brazo.png",
             ),
             RoutineCard(
               title: 'Hombros',
-              description: 'Ejercicios para desarrollar los músculos del hombro. Incluye press de hombros, elevaciones laterales y frontales.',
+              description:
+                  'Ejercicios para desarrollar los músculos del hombro. Incluye press de hombros, elevaciones laterales y frontales.',
               onTap: () {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => const RutinesPage(routineName: 'Hombros'),
+                    builder: (context) =>
+                        const RutinesPage(routineName: 'Hombros'),
                   ),
                 );
               },
+              //imagePath: "rutinas_app/lib/images/brazo.png",
             ),
           ],
         ),
@@ -80,6 +93,10 @@ class HomeScreen extends StatelessWidget {
             icon: Icon(Icons.person),
             label: 'Perfil',
           ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.calendar_month),
+            label: 'Calendario',
+          )
         ],
         currentIndex: 0,
         selectedItemColor: Colors.blueAccent,
@@ -87,11 +104,19 @@ class HomeScreen extends StatelessWidget {
         backgroundColor: Colors.white,
         elevation: 10,
         onTap: (index) {
-          if (index == 1) {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => const ProfileScreen()),
-            );
+          switch (index) {
+            case 1:
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const ProfileScreen()),
+              );
+              break;
+            case 2:
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const CalendarScreen()),
+              );
+              break;
           }
         },
       ),
