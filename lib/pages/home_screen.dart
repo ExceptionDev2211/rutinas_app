@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:rutinas_app/pages/calendar_screen.dart';
+import 'package:rutinas_app/utils/page_animation_routes.dart';
 import '../widgets/routine_card.dart';
 import 'profile_screen.dart';
 import 'routines_screen.dart';
@@ -27,12 +28,11 @@ class HomeScreen extends StatelessWidget {
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(
-                    builder: (context) =>
-                        const RutinesPage(routineName: 'Abdominales'),
+                  PageAnimationRoutes(
+                    widget: const RutinesPage(routineName: 'Brazos'), ejex: 0, ejey: -0.4
                   ),
                 );
-              },
+              }, 
               //imagePath: "rutinas_app/lib/images/brazo.png",
             ),
             RoutineCard(
@@ -42,9 +42,8 @@ class HomeScreen extends StatelessWidget {
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(
-                    builder: (context) =>
-                        const RutinesPage(routineName: 'Brazos'),
+                  PageAnimationRoutes(
+                    widget: const RutinesPage(routineName: 'Brazos'), ejex: 0, ejey: -0.2
                   ),
                 );
               }, 
@@ -54,15 +53,14 @@ class HomeScreen extends StatelessWidget {
               title: 'Piernas',
               description:
                   'Rutina para fortalecer y esculpir las piernas. Incluye sentadillas, lunges y extensiones de piernas.',
-              onTap: () {
+            onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(
-                    builder: (context) =>
-                        const RutinesPage(routineName: 'Piernas'),
+                  PageAnimationRoutes(
+                    widget: const RutinesPage(routineName: 'Brazos'), ejex: 0, ejey: 0
                   ),
                 );
-              },
+              }, 
               //imagePath: "rutinas_app/lib/images/brazo.png",
             ),
             RoutineCard(
@@ -72,12 +70,11 @@ class HomeScreen extends StatelessWidget {
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(
-                    builder: (context) =>
-                        const RutinesPage(routineName: 'Hombros'),
+                  PageAnimationRoutes(
+                    widget: const RutinesPage(routineName: 'Brazos'), ejex: 0, ejey: 0.2
                   ),
                 );
-              }, 
+              },  
               //imagePath: "rutinas_app/lib/images/brazo.png",
             ),
           ],
