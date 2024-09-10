@@ -29,10 +29,11 @@ class HomeScreen extends StatelessWidget {
                 Navigator.push(
                   context,
                   PageAnimationRoutes(
-                    widget: const RutinesPage(routineName: 'Brazos'), ejex: 0, ejey: -0.4
+                    widget: const RutinesPage(routineName: 'Abdominales'), ejex: 0, ejey: -0.4
                   ),
                 );
               }, 
+              //backgroundImage: AssetImage('assets/images/brazo.jpg'),
               //imagePath: "rutinas_app/lib/images/brazo.png",
             ),
             RoutineCard(
@@ -57,7 +58,7 @@ class HomeScreen extends StatelessWidget {
                 Navigator.push(
                   context,
                   PageAnimationRoutes(
-                    widget: const RutinesPage(routineName: 'Brazos'), ejex: 0, ejey: 0
+                    widget: const RutinesPage(routineName: 'Piernas'), ejex: 0, ejey: 0
                   ),
                 );
               }, 
@@ -71,7 +72,7 @@ class HomeScreen extends StatelessWidget {
                 Navigator.push(
                   context,
                   PageAnimationRoutes(
-                    widget: const RutinesPage(routineName: 'Brazos'), ejex: 0, ejey: 0.2
+                    widget: const RutinesPage(routineName: 'Hombros'), ejex: 0, ejey: 0.2
                   ),
                 );
               },  
