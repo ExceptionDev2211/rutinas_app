@@ -15,6 +15,10 @@ class _CalendarScreenState extends State<CalendarScreen> {
   // Map para guardar eventos con sus respectivos colores
   Map<DateTime, Map<String, Color>> _events = {};
 
+  final TextEditingController _eventController = TextEditingController();
+  Color _selectedColor = Colors.blue; // Color por defecto
+  final FocusNode _focusNode = FocusNode();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -79,75 +83,91 @@ class _CalendarScreenState extends State<CalendarScreen> {
 
   // Diálogo para agregar eventos con colores
   void _showAddEventDialog(BuildContext context) {
-    final TextEditingController _eventController = TextEditingController();
-    Color _selectedColor = Colors.blue; // Color por defecto
-
     showDialog(
       context: context,
-      builder: (context) => AlertDialog(
-        title: const Text('Agregar Evento con Color'),
-        content: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            TextField(
-              controller: _eventController,
-              decoration: const InputDecoration(hintText: 'Evento'),
-            ),
-            const SizedBox(height: 20),
-            // Dropdown para seleccionar color
-            DropdownButton<Color>(
-              value: _selectedColor,
-              items: [
-                DropdownMenuItem(
-                  value: Colors.red,
-                  child: Text('Rojo', style: TextStyle(color: Colors.red)),
+      builder: (context) {
+        return StatefulBuilder(
+          builder: (context, setState) {
+            // Asegúrate de que el TextField tenga el foco
+            WidgetsBinding.instance.addPostFrameCallback((_) {
+              FocusScope.of(context).requestFocus(_focusNode);
+            });
+
+            return AlertDialog(
+              title: const Text('Agregar Evento con Color'),
+              content: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Container(
+                    padding: const EdgeInsets.all(15),
+                    child: TextFormField(
+                      controller: _eventController,
+                      focusNode: _focusNode,
+                      autofocus: true, 
+                      keyboardType: TextInputType.text,
+                      textInputAction: TextInputAction.send,
+                      decoration: const InputDecoration(hintText: 'Evento'),
+                   
+                   
+                  ),
+                  ),
+                  const SizedBox(height: 20),
+                  // Dropdown para seleccionar color
+                  DropdownButton<Color>(
+                    value: _selectedColor,
+                    items: [
+                      DropdownMenuItem(
+                        value: Colors.red,
+                        child: Text('Rojo', style: TextStyle(color: Colors.red)),
+                      ),
+                      DropdownMenuItem(
+                        value: Colors.green,
+                        child: Text('Verde', style: TextStyle(color: Colors.green)),
+                      ),
+                      DropdownMenuItem(
+                        value: Colors.blue,
+                        child: Text('Azul', style: TextStyle(color: Colors.blue)),
+                      ),
+                    ],
+                    onChanged: (color) {
+                      setState(() {
+                        _selectedColor = color!;
+                      });
+                    },
+                  ),
+                ],
+              ),
+              actions: [
+                TextButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  child: const Text('Cancelar'),
                 ),
-                DropdownMenuItem(
-                  value: Colors.green,
-                  child: Text('Verde', style: TextStyle(color: Colors.green)),
-                ),
-                DropdownMenuItem(
-                  value: Colors.blue,
-                  child: Text('Azul', style: TextStyle(color: Colors.blue)),
+                TextButton(
+                  onPressed: () {
+                    if (_eventController.text.isEmpty) return;
+
+                    setState(() {
+                      // Agregar el evento con su color
+                      if (_events[_selectedDay] != null) {
+                        _events[_selectedDay]![_eventController.text] = _selectedColor;
+                      } else {
+                        _events[_selectedDay!] = {
+                          _eventController.text: _selectedColor
+                        };
+                      }
+                    });
+
+                    Navigator.pop(context);
+                  },
+                  child: const Text('Guardar'),
                 ),
               ],
-              onChanged: (color) {
-                setState(() {
-                  _selectedColor = color!;
-                });
-              },
-            ),
-          ],
-        ),
-        actions: [
-          TextButton(
-            onPressed: () {
-              Navigator.pop(context);
-            },
-            child: const Text('Cancelar'),
-          ),
-          TextButton(
-            onPressed: () {
-              if (_eventController.text.isEmpty) return;
-
-              setState(() {
-                // Agregar el evento con su color
-                if (_events[_selectedDay] != null) {
-                  _events[_selectedDay]![_eventController.text] =
-                      _selectedColor;
-                } else {
-                  _events[_selectedDay!] = {
-                    _eventController.text: _selectedColor
-                  };
-                }
-              });
-
-              Navigator.pop(context);
-            },
-            child: const Text('Guardar'),
-          ),
-        ],
-      ),
+            );
+          },
+        );
+      },
     );
   }
 
