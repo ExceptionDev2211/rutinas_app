@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'edite_profile.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -33,7 +34,12 @@ class ProfileScreen extends StatelessWidget {
             ),
             const SizedBox(height: 21),
             ElevatedButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const EditProfile()),
+                );
+              },
               child: const Text('Editar Perfil'),
             ),
             const SizedBox(height: 20),
