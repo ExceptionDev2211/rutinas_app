@@ -1,7 +1,90 @@
 import 'package:flutter/material.dart';
+import 'package:rutinas_app/widgets/custom_keyboard.dart'; // Asegúrate de que la ruta al archivo sea correcta
 
-class EditProfile extends StatelessWidget {
+class EditProfile extends StatefulWidget {
   const EditProfile({super.key});
+
+  @override
+  _EditProfileState createState() => _EditProfileState();
+}
+
+class _EditProfileState extends State<EditProfile> {
+  final TextEditingController _fullNameController = TextEditingController();
+  final TextEditingController _ageController = TextEditingController();
+  final TextEditingController _weightController = TextEditingController();
+  final TextEditingController _heightController = TextEditingController();
+  final TextEditingController _contactNumberController = TextEditingController();
+  
+  final FocusNode _fullNameFocusNode = FocusNode();
+  final FocusNode _ageFocusNode = FocusNode();
+  final FocusNode _weightFocusNode = FocusNode();
+  final FocusNode _heightFocusNode = FocusNode();
+  final FocusNode _contactNumberFocusNode = FocusNode();
+
+  @override
+  void initState() {
+    super.initState();
+
+    _fullNameFocusNode.addListener(() {
+      if (_fullNameFocusNode.hasFocus) {
+        _showCustomKeyboard(_fullNameController);
+      }
+    });
+
+    _ageFocusNode.addListener(() {
+      if (_ageFocusNode.hasFocus) {
+        _showCustomKeyboard(_ageController);
+      }
+    });
+
+    _weightFocusNode.addListener(() {
+      if (_weightFocusNode.hasFocus) {
+        _showCustomKeyboard(_weightController);
+      }
+    });
+
+    _heightFocusNode.addListener(() {
+      if (_heightFocusNode.hasFocus) {
+        _showCustomKeyboard(_heightController);
+      }
+    });
+
+    _contactNumberFocusNode.addListener(() {
+      if (_contactNumberFocusNode.hasFocus) {
+        _showCustomKeyboard(_contactNumberController);
+      }
+    });
+  }
+
+  void _showCustomKeyboard(TextEditingController controller) {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true, // Asegúrate de que el tamaño del teclado se ajuste
+      builder: (context) {
+        return CustomKeyboard(
+          onTextInput: (text) {
+            final newText = controller.text + text;
+            controller.text = newText;
+            controller.selection = TextSelection.fromPosition(
+              TextPosition(offset: controller.text.length),
+            );
+          },
+          onBackspace: () {
+            final text = controller.text;
+            if (text.isNotEmpty) {
+              controller.text = text.substring(0, text.length - 1);
+              controller.selection = TextSelection.fromPosition(
+                TextPosition(offset: controller.text.length),
+              );
+            }
+          },
+          onEnter: () {
+            Navigator.of(context).pop(); // Cierra el teclado (BottomSheet)
+          },
+        );
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +109,9 @@ class EditProfile extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 10.0),
-              const TextField(
+              TextField(
+                controller: _fullNameController,
+                focusNode: _fullNameFocusNode,
                 decoration: InputDecoration(
                   labelText: 'Full Name',
                   border: OutlineInputBorder(),
@@ -34,7 +119,9 @@ class EditProfile extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 20.0),
-              const TextField(
+              TextField(
+                controller: _ageController,
+                focusNode: _ageFocusNode,
                 keyboardType: TextInputType.number,
                 decoration: InputDecoration(
                   labelText: 'Age',
@@ -43,7 +130,9 @@ class EditProfile extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 20.0),
-              const TextField(
+              TextField(
+                controller: _weightController,
+                focusNode: _weightFocusNode,
                 keyboardType: TextInputType.number,
                 decoration: InputDecoration(
                   labelText: 'Weight (kg)',
@@ -52,7 +141,9 @@ class EditProfile extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 20.0),
-              const TextField(
+              TextField(
+                controller: _heightController,
+                focusNode: _heightFocusNode,
                 keyboardType: TextInputType.number,
                 decoration: InputDecoration(
                   labelText: 'Height (cm)',
@@ -78,7 +169,9 @@ class EditProfile extends StatelessWidget {
                 },
               ),
               const SizedBox(height: 20.0),
-              const TextField(
+              TextField(
+                controller: _contactNumberController,
+                focusNode: _contactNumberFocusNode,
                 keyboardType: TextInputType.phone,
                 decoration: InputDecoration(
                   labelText: 'Contact Number',
