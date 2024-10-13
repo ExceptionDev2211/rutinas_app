@@ -163,7 +163,7 @@ class _RutinesPageState extends State<RutinesPage> {
             ],
           ),
         ),
-        body: SingleChildScrollView( // Agrega el SingleChildScrollView
+        body: SingleChildScrollView( 
           child: Column(
             children: [
               Padding(
@@ -212,14 +212,14 @@ class _RutinesPageState extends State<RutinesPage> {
                 ),
               ),
               const SizedBox(height: 16),
-              ElevatedButton( // Mueve el botón aquí
+              ElevatedButton( 
                 onPressed: _addCustomRoutine,
                 child: Text('Agregar'),
               ),
               const SizedBox(height: 16),
-              // Usa el TabBarView como antes
+              
               SizedBox(
-                height: 400, // Ajusta la altura según sea necesario
+                height: 400,
                 child: TabBarView(
                   children: [
                     _buildExerciseList(_getAllRoutines('Principiante')),
