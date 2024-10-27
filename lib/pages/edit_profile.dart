@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:rutinas_app/widgets/custom_keyboard.dart'; // Asegúrate de que la ruta al archivo sea correcta
 
 class EditProfile extends StatefulWidget {
   const EditProfile({super.key});
@@ -13,78 +12,8 @@ class _EditProfileState extends State<EditProfile> {
   final TextEditingController _ageController = TextEditingController();
   final TextEditingController _weightController = TextEditingController();
   final TextEditingController _heightController = TextEditingController();
-  final TextEditingController _contactNumberController = TextEditingController();
-  
-  final FocusNode _fullNameFocusNode = FocusNode();
-  final FocusNode _ageFocusNode = FocusNode();
-  final FocusNode _weightFocusNode = FocusNode();
-  final FocusNode _heightFocusNode = FocusNode();
-  final FocusNode _contactNumberFocusNode = FocusNode();
-
-  @override
-  void initState() {
-    super.initState();
-
-    _fullNameFocusNode.addListener(() {
-      if (_fullNameFocusNode.hasFocus) {
-        _showCustomKeyboard(_fullNameController);
-      }
-    });
-
-    _ageFocusNode.addListener(() {
-      if (_ageFocusNode.hasFocus) {
-        _showCustomKeyboard(_ageController);
-      }
-    });
-
-    _weightFocusNode.addListener(() {
-      if (_weightFocusNode.hasFocus) {
-        _showCustomKeyboard(_weightController);
-      }
-    });
-
-    _heightFocusNode.addListener(() {
-      if (_heightFocusNode.hasFocus) {
-        _showCustomKeyboard(_heightController);
-      }
-    });
-
-    _contactNumberFocusNode.addListener(() {
-      if (_contactNumberFocusNode.hasFocus) {
-        _showCustomKeyboard(_contactNumberController);
-      }
-    });
-  }
-
-  void _showCustomKeyboard(TextEditingController controller) {
-    showModalBottomSheet(
-      context: context,
-      isScrollControlled: true, // Asegúrate de que el tamaño del teclado se ajuste
-      builder: (context) {
-        return CustomKeyboard(
-          onTextInput: (text) {
-            final newText = controller.text + text;
-            controller.text = newText;
-            controller.selection = TextSelection.fromPosition(
-              TextPosition(offset: controller.text.length),
-            );
-          },
-          onBackspace: () {
-            final text = controller.text;
-            if (text.isNotEmpty) {
-              controller.text = text.substring(0, text.length - 1);
-              controller.selection = TextSelection.fromPosition(
-                TextPosition(offset: controller.text.length),
-              );
-            }
-          },
-          onEnter: () {
-            Navigator.of(context).pop(); // Cierra el teclado (BottomSheet)
-          },
-        );
-      },
-    );
-  }
+  final TextEditingController _contactNumberController =
+      TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -111,7 +40,6 @@ class _EditProfileState extends State<EditProfile> {
               const SizedBox(height: 10.0),
               TextField(
                 controller: _fullNameController,
-                focusNode: _fullNameFocusNode,
                 decoration: InputDecoration(
                   labelText: 'Full Name',
                   border: OutlineInputBorder(),
@@ -121,7 +49,6 @@ class _EditProfileState extends State<EditProfile> {
               const SizedBox(height: 20.0),
               TextField(
                 controller: _ageController,
-                focusNode: _ageFocusNode,
                 keyboardType: TextInputType.number,
                 decoration: InputDecoration(
                   labelText: 'Age',
@@ -132,7 +59,6 @@ class _EditProfileState extends State<EditProfile> {
               const SizedBox(height: 20.0),
               TextField(
                 controller: _weightController,
-                focusNode: _weightFocusNode,
                 keyboardType: TextInputType.number,
                 decoration: InputDecoration(
                   labelText: 'Weight (kg)',
@@ -143,7 +69,6 @@ class _EditProfileState extends State<EditProfile> {
               const SizedBox(height: 20.0),
               TextField(
                 controller: _heightController,
-                focusNode: _heightFocusNode,
                 keyboardType: TextInputType.number,
                 decoration: InputDecoration(
                   labelText: 'Height (cm)',
@@ -159,10 +84,16 @@ class _EditProfileState extends State<EditProfile> {
                   prefixIcon: Icon(Icons.flag),
                 ),
                 items: const [
-                  DropdownMenuItem(value: 'Lose Weight', child: Text('Lose Weight')),
-                  DropdownMenuItem(value: 'Build Muscle', child: Text('Build Muscle')),
-                  DropdownMenuItem(value: 'Increase Strength', child: Text('Increase Strength')),
-                  DropdownMenuItem(value: 'Improve Endurance', child: Text('Improve Endurance')),
+                  DropdownMenuItem(
+                      value: 'Lose Weight', child: Text('Lose Weight')),
+                  DropdownMenuItem(
+                      value: 'Build Muscle', child: Text('Build Muscle')),
+                  DropdownMenuItem(
+                      value: 'Increase Strength',
+                      child: Text('Increase Strength')),
+                  DropdownMenuItem(
+                      value: 'Improve Endurance',
+                      child: Text('Improve Endurance')),
                 ],
                 onChanged: (value) {
                   // Manejar la selección del objetivo de entrenamiento
@@ -171,7 +102,6 @@ class _EditProfileState extends State<EditProfile> {
               const SizedBox(height: 20.0),
               TextField(
                 controller: _contactNumberController,
-                focusNode: _contactNumberFocusNode,
                 keyboardType: TextInputType.phone,
                 decoration: InputDecoration(
                   labelText: 'Contact Number',
