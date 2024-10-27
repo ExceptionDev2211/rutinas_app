@@ -33,6 +33,7 @@ dependencies:
   table_calendar: ^3.0.6
   flutter_keyboard_visibility: ^5.4.0
   sqflite: ^2.3.3+1
+  image_picker: ^0.8.5+3
   path: ^1.8.0
   
 
@@ -69,6 +70,7 @@ flutter:
     - assets/images/abdominales.jpg
     - assets/images/piernas.jpg
     - assets/images/hombros.jpg
+    - assets/images/empty.jpg
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

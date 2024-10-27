@@ -207,7 +207,19 @@ class _CalendarScreenState extends State<CalendarScreen> {
   // Lista de eventos
   Widget _buildEventList() {
     if (_selectedDay == null || _events[_selectedDay] == null) {
-      return const Text('No hay eventos para este día.');
+      return Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          const Text('No hay eventos para este día.'),
+          const SizedBox(height: 20), // Espacio entre el texto y la imagen
+          Image.asset(
+            'assets/images/empty.jpg',
+            width: 100,
+            height: 100,
+            fit: BoxFit.cover,
+          ),
+        ],
+      );
     }
 
     return Expanded(
