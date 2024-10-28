@@ -16,9 +16,9 @@ class _CalendarScreenState extends State<CalendarScreen> {
   DateTime? _selectedDay;
   Map<DateTime, Map<String, Color>> _events = {};
   final TextEditingController _eventController = TextEditingController();
-  Color _selectedColor = Colors.blue; // Color predeterminado
-  bool _showCustomNotification = false; // Variable para mostrar la notificación
-  Timer? _notificationTimer; // Timer para ocultar la notificación
+  Color _selectedColor = Colors.blue;
+  bool _showCustomNotification = false;
+  Timer? _notificationTimer;
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +41,6 @@ class _CalendarScreenState extends State<CalendarScreen> {
                       setState(() {
                         _selectedDay = selectedDay;
                         _focusedDay = focusedDay;
-                        print("Día seleccionado: $_selectedDay");
                       });
                     },
                     calendarFormat: CalendarFormat.month,
@@ -138,7 +137,6 @@ class _CalendarScreenState extends State<CalendarScreen> {
                     }
 
                     setState(() {
-                      // Guardar el evento con el color seleccionado
                       if (_events[_selectedDay] != null) {
                         _events[_selectedDay]![_eventController.text] = _selectedColor;
                       } else {
@@ -147,7 +145,6 @@ class _CalendarScreenState extends State<CalendarScreen> {
                         };
                       }
 
-                      print("Evento agregado: ${_eventController.text} con color: $_selectedColor en fecha: $_selectedDay");
                       _showCustomNotificationMessage();
                       _eventController.clear();
                     });
@@ -175,7 +172,6 @@ class _CalendarScreenState extends State<CalendarScreen> {
             onColorChange: (color) {
               setState(() {
                 _selectedColor = color;
-                print("Color seleccionado: $_selectedColor"); // Confirmación de selección
               });
             },
           ),
