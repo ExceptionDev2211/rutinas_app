@@ -6,11 +6,11 @@ class CustomKeyboard extends StatefulWidget {
   final VoidCallback onEnter;
 
   const CustomKeyboard({
-    Key? key,
+    super.key,
     required this.onTextInput,
     required this.onBackspace,
     required this.onEnter,
-  }) : super(key: key);
+  });
 
   @override
   _CustomKeyboardState createState() => _CustomKeyboardState();
@@ -43,13 +43,13 @@ class _CustomKeyboardState extends State<CustomKeyboard> {
                         }
                       });
                     },
-                    child: const Icon(Icons.star, size: 20),
                     style: ElevatedButton.styleFrom(
                       minimumSize: const Size(double.infinity, 40),
                       padding: const EdgeInsets.symmetric(vertical: 0),
                       textStyle: const TextStyle(fontSize: 14),
                       backgroundColor: Colors.grey[300], // Color de fondo del botón
                     ),
+                    child: const Icon(Icons.star, size: 20),
                   ),
                 ),
                 Expanded(
@@ -62,13 +62,13 @@ class _CustomKeyboardState extends State<CustomKeyboard> {
                         }
                       });
                     },
-                    child: Text(_isNumeric ? 'ABC' : '123'),
                     style: ElevatedButton.styleFrom(
                       minimumSize: const Size(double.infinity, 40),
                       padding: const EdgeInsets.symmetric(vertical: 0),
                       textStyle: const TextStyle(fontSize: 14),
                       backgroundColor: Colors.grey[300], // Color de fondo del botón
                     ),
+                    child: Text(_isNumeric ? 'ABC' : '123'),
                   ),
                 ),
                 Expanded(
@@ -77,14 +77,14 @@ class _CustomKeyboardState extends State<CustomKeyboard> {
                       setState(() {
                         _isUpperCase = !_isUpperCase;
                       });
-                    },
-                    child: Icon(_isUpperCase ? Icons.keyboard_capslock : Icons.keyboard), // Cambiar icono basado en el estado
+                    }, // Cambiar icono basado en el estado
                     style: ElevatedButton.styleFrom(
                       minimumSize: const Size(double.infinity, 40),
                       padding: const EdgeInsets.symmetric(vertical: 0),
                       textStyle: const TextStyle(fontSize: 14),
                       backgroundColor: Colors.grey[300], // Color de fondo del botón
                     ),
+                    child: Icon(_isUpperCase ? Icons.keyboard_capslock : Icons.keyboard),
                   ),
                 ),
               ],
@@ -101,25 +101,25 @@ class _CustomKeyboardState extends State<CustomKeyboard> {
               Expanded(
                 child: ElevatedButton(
                   onPressed: widget.onBackspace,
-                  child: const Icon(Icons.backspace, size: 20),
                   style: ElevatedButton.styleFrom(
                     minimumSize: const Size(double.infinity, 40),
                     padding: const EdgeInsets.symmetric(vertical: 0),
                     textStyle: const TextStyle(fontSize: 14),
                     backgroundColor: Colors.grey[300], // Color de fondo del botón
                   ),
+                  child: const Icon(Icons.backspace, size: 20),
                 ),
               ),
               Expanded(
                 child: ElevatedButton(
                   onPressed: widget.onEnter,
-                  child: const Icon(Icons.arrow_forward, size: 20),
                   style: ElevatedButton.styleFrom(
                     minimumSize: const Size(double.infinity, 40),
                     padding: const EdgeInsets.symmetric(vertical: 0),
                     textStyle: const TextStyle(fontSize: 14),
                     backgroundColor: Colors.grey[300], // Color de fondo del botón
                   ),
+                  child: const Icon(Icons.arrow_forward, size: 20),
                 ),
               ),
             ],
@@ -159,13 +159,13 @@ class _CustomKeyboardState extends State<CustomKeyboard> {
       onPressed: () {
         widget.onTextInput(label);
       },
-      child: Text(label),
       style: ElevatedButton.styleFrom(
         minimumSize: const Size(30, 30), 
         padding: const EdgeInsets.all(0),
         textStyle: const TextStyle(fontSize: 14),
         backgroundColor: Colors.grey[300], // Color de fondo del botón
       ),
+      child: Text(label),
     );
   }
 }

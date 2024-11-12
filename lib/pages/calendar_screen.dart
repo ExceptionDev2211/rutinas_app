@@ -14,7 +14,7 @@ class CalendarScreen extends StatefulWidget {
 class _CalendarScreenState extends State<CalendarScreen> {
   DateTime _focusedDay = DateTime.now();
   DateTime? _selectedDay;
-  Map<DateTime, Map<String, Color>> _events = {};
+  final Map<DateTime, Map<String, Color>> _events = {};
   final TextEditingController _eventController = TextEditingController();
   Color _selectedColor = Colors.blue;
   bool _showCustomNotification = false;
@@ -189,16 +189,20 @@ class _CalendarScreenState extends State<CalendarScreen> {
   }
 
   void _showCustomNotificationMessage() {
-    setState(() {
-      _showCustomNotification = true;
-    });
+  if (!mounted) return; // Ensure the widget is still in the widget tree
 
-    _notificationTimer = Timer(const Duration(seconds: 3), () {
-      setState(() {
-        _showCustomNotification = false;
-      });
+  setState(() {
+    _showCustomNotification = true;
+  });
+
+  _notificationTimer = Timer(const Duration(seconds: 3), () {
+    if (!mounted) return; // Check again before calling setState
+
+    setState(() {
+      _showCustomNotification = false;
     });
-  }
+  });
+}
 
   Widget _buildCustomNotification() {
     return Positioned(

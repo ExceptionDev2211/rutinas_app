@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:rutinas_app/pages/location_screen.dart';
 import '../widgets/routine_card.dart';
 import 'profile_screen.dart';
+import 'road.dart';
 import 'routines_screen.dart';
 import 'calendar_screen.dart';
 import '../utils/page_animation_routes.dart';
@@ -94,6 +96,10 @@ class HomeScreen extends StatelessWidget {
             label: 'Rutinas',
           ),
           BottomNavigationBarItem(
+            icon: Icon(Icons.download),
+            label: 'Rutas',
+          ),
+          BottomNavigationBarItem(
             icon: Icon(Icons.calendar_month),
             label: 'Calendario',
           ),
@@ -101,6 +107,7 @@ class HomeScreen extends StatelessWidget {
             icon: Icon(Icons.person),
             label: 'Perfil',
           ),
+          
         ],
         currentIndex: 0,
         selectedItemColor: Colors.blueAccent,
@@ -112,10 +119,16 @@ class HomeScreen extends StatelessWidget {
             case 1:
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const CalendarScreen()),
+                MaterialPageRoute(builder: (context) => const Road()),
               );
               break;
             case 2:
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const CalendarScreen()),
+              );
+              break;
+            case 3:
               Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) => const ProfileScreen()),

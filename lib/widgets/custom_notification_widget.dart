@@ -4,9 +4,9 @@ class CustomNotificationWidget extends StatelessWidget {
   final String message;
 
   const CustomNotificationWidget({
-    Key? key,
+    super.key,
     required this.message,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

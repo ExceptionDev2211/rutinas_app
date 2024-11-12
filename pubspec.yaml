@@ -37,7 +37,11 @@ dependencies:
   path: ^1.8.0
   cupertino_icons: ^1.0.8
   flutter_material_color_picker: ^1.2.0
-
+  flutter_riverpod: ^2.6.1
+  geolocator: ^13.0.1
+  permission_handler: ^11.3.1
+  flutter_map: ^7.0.0
+  latlong2: ^0.9.0  # Asegúrate de agregar esta dependencia
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.

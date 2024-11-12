@@ -136,7 +136,7 @@ class _RutinesPageState extends State<RutinesPage> {
             trailing: isPredefined 
                 ? null 
                 : IconButton(
-                    icon: Icon(Icons.delete),
+                    icon: const Icon(Icons.delete),
                     onPressed: () {
                       _deleteCustomRoutine(exercise.id!);
                     },
@@ -166,8 +166,8 @@ class _RutinesPageState extends State<RutinesPage> {
         body: SingleChildScrollView( 
           child: Column(
             children: [
-              Padding(
-                padding: const EdgeInsets.all(16.0),
+              const Padding(
+                padding: EdgeInsets.all(16.0),
                 child: Text(
                   'Agregar Rutina Personalizada',
                   style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
@@ -180,14 +180,14 @@ class _RutinesPageState extends State<RutinesPage> {
                     Expanded(
                       child: TextField(
                         controller: titleController,
-                        decoration: InputDecoration(hintText: 'Título de la rutina'),
+                        decoration: const InputDecoration(hintText: 'Título de la rutina'),
                       ),
                     ),
                     const SizedBox(width: 8),
                     Expanded(
                       child: TextField(
                         controller: descriptionController,
-                        decoration: InputDecoration(hintText: 'Descripción de la rutina'),
+                        decoration: const InputDecoration(hintText: 'Descripción de la rutina'),
                       ),
                     ),
                     const SizedBox(width: 8),
@@ -214,7 +214,7 @@ class _RutinesPageState extends State<RutinesPage> {
               const SizedBox(height: 16),
               ElevatedButton( 
                 onPressed: _addCustomRoutine,
-                child: Text('Agregar'),
+                child: const Text('Agregar'),
               ),
               const SizedBox(height: 16),
               

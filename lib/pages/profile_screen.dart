@@ -14,7 +14,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   String? _imagePath;
 
   Future<void> _pickImage() async {
-    final ImagePicker _picker = ImagePicker();
+    final ImagePicker picker = ImagePicker();
 
     // Mostrar opciones al usuario para seleccionar la imagen
     final XFile? image = await showDialog<XFile?>(
@@ -22,20 +22,31 @@ class _ProfileScreenState extends State<ProfileScreen> {
       builder: (BuildContext context) {
         return AlertDialog(
           title: const Text('Seleccionar imagen'),
-          content:
-              const Text('¿Desea tomar una foto o seleccionar de la galería?'),
+          content: const Text('¿Desea tomar una foto o seleccionar de la galería?'),
           actions: [
             TextButton(
               onPressed: () async {
-                Navigator.pop(context,
-                    await _picker.pickImage(source: ImageSource.camera));
+                // Usa un try-catch para capturar posibles errores al acceder a la cámara
+                try {
+                  final XFile? pickedImage = await picker.pickImage(source: ImageSource.camera);
+                  Navigator.pop(context, pickedImage);
+                } catch (e) {
+                  Navigator.pop(context, null);
+                  _showError(context, 'Error al acceder a la cámara.');
+                }
               },
               child: const Text('Tomar Foto'),
             ),
             TextButton(
               onPressed: () async {
-                Navigator.pop(context,
-                    await _picker.pickImage(source: ImageSource.gallery));
+                // Usa un try-catch para capturar posibles errores al acceder a la galería
+                try {
+                  final XFile? pickedImage = await picker.pickImage(source: ImageSource.gallery);
+                  Navigator.pop(context, pickedImage);
+                } catch (e) {
+                  Navigator.pop(context, null);
+                  _showError(context, 'Error al acceder a la galería.');
+                }
               },
               child: const Text('Seleccionar de la Galería'),
             ),
@@ -50,11 +61,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
       },
     );
 
+    // Actualiza el estado solo si se ha seleccionado una imagen
     if (image != null) {
       setState(() {
-        _imagePath = image.path; // Actualiza la ruta de la imagen seleccionada
+        _imagePath = image.path;
       });
     }
+  }
+
+  void _showError(BuildContext context, String message) {
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(message)));
   }
 
   @override
@@ -70,17 +86,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
           children: <Widget>[
             Center(
               child: GestureDetector(
-                onTap:
-                    _pickImage, // Permite cargar una imagen al tocar el círculo
+                onTap: _pickImage, // Permite cargar una imagen al tocar el círculo
                 child: CircleAvatar(
                   radius: 70,
-                  backgroundColor:
-                      Colors.grey, // Color de fondo en caso de no haber imagen
+                  backgroundColor: Colors.grey, // Color de fondo en caso de no haber imagen
                   backgroundImage: _imagePath != null
-                      ? FileImage(
-                          File(_imagePath!)) // Muestra la imagen seleccionada
+                      ? FileImage(File(_imagePath!)) // Muestra la imagen seleccionada
                       : const NetworkImage(
-                          'https://cdn-icons-png.flaticon.com/512/2919/2919906.png'), // Ícono predeterminado
+                          'https://cdn-icons-png.flaticon.com/512/2919/2919906.png') as ImageProvider, // Ícono predeterminado
                 ),
               ),
             ),

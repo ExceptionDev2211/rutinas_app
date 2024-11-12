@@ -40,7 +40,7 @@ class _EditProfileState extends State<EditProfile> {
               const SizedBox(height: 10.0),
               TextField(
                 controller: _fullNameController,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   labelText: 'Full Name',
                   border: OutlineInputBorder(),
                   prefixIcon: Icon(Icons.person),
@@ -50,7 +50,7 @@ class _EditProfileState extends State<EditProfile> {
               TextField(
                 controller: _ageController,
                 keyboardType: TextInputType.number,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   labelText: 'Age',
                   border: OutlineInputBorder(),
                   prefixIcon: Icon(Icons.cake),
@@ -60,7 +60,7 @@ class _EditProfileState extends State<EditProfile> {
               TextField(
                 controller: _weightController,
                 keyboardType: TextInputType.number,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   labelText: 'Weight (kg)',
                   border: OutlineInputBorder(),
                   prefixIcon: Icon(Icons.fitness_center),
@@ -70,7 +70,7 @@ class _EditProfileState extends State<EditProfile> {
               TextField(
                 controller: _heightController,
                 keyboardType: TextInputType.number,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   labelText: 'Height (cm)',
                   border: OutlineInputBorder(),
                   prefixIcon: Icon(Icons.height),
@@ -103,7 +103,7 @@ class _EditProfileState extends State<EditProfile> {
               TextField(
                 controller: _contactNumberController,
                 keyboardType: TextInputType.phone,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   labelText: 'Contact Number',
                   border: OutlineInputBorder(),
                   prefixIcon: Icon(Icons.phone),

@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'pages/home_screen.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';  // Ensure Riverpod is imported
 
 void main() {
-  runApp(const GymRoutineApp());
+  runApp(const ProviderScope(child: GymRoutineApp()));  // Wrap your app with ProviderScope
 }
 
 class GymRoutineApp extends StatelessWidget {
