@@ -24,7 +24,7 @@ class LocationScreen extends ConsumerWidget {
             const SizedBox(height: 10),
             userLocationAsync.when(
               data: (data) {
-                // Asegúrate de que 'data' contiene los valores de latitud y longitud
+                
                 return Text(
                   'Latitud: ${data.$1}, Longitud: ${data.$2}',
                   style: const TextStyle(fontSize: 16),

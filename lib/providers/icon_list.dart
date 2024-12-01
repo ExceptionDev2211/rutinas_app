@@ -93,6 +93,6 @@ class IconList {
     'local_florist_outlined': Icons.local_florist_outlined,
     'sports_bar_outlined': Icons.sports_bar_outlined,
     'home': Icons.home,
-    // Puedes seguir añadiendo más íconos aquí según sea necesario.
+ 
   };
 }

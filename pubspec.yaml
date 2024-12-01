@@ -76,6 +76,14 @@ flutter:
     - assets/images/piernas.jpg
     - assets/images/hombros.jpg
     - assets/images/empty.jpg
+    - assets/images/elevacion _de _piernas.gif
+    - assets/images/crunch_de_rodillas.gif
+    - assets/images/tablon.jpg
+    - assets/images/tablon_con_elevacion_de _piernas.gif
+    - assets/images/crunches_con peso.gif
+    - assets/images/elevacion_de_piernas_con_peso.gif
+    - assets/images/crunches_giro.gif
+
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

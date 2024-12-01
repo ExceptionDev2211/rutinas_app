@@ -2,7 +2,7 @@ import 'dart:async';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 
-// Definimos una clase para representar una coordenada en la base de datos
+
 class RouteRoad {
   final int? id;
   final double latitude;
@@ -11,7 +11,7 @@ class RouteRoad {
 
   RouteRoad({this.id, required this.latitude, required this.longitude, required this.timestamp});
 
-  // Convertir la coordenada en un mapa para insertarla en la base de datos
+  
   Map<String, dynamic> toMap() {
     return {
       'latitude': latitude,
@@ -20,7 +20,7 @@ class RouteRoad {
     };
   }
 
-  // Convertir un mapa en una instancia de Route
+  
   static RouteRoad fromMap(Map<String, dynamic> map) {
     return RouteRoad(
       id: map['id'],
@@ -65,13 +65,13 @@ class DatabaseHelper {
     );
   }
 
-  // Insertar una nueva ruta en la base de datos
+  
   Future<int> insertRoute(RouteRoad route) async {
     final db = await instance.database;
     return await db.insert('routes', route.toMap());
   }
 
-  // Obtener todas las rutas
+  
   Future<List<RouteRoad>> getRoutes() async {
     final db = await instance.database;
     final result = await db.query('routes');

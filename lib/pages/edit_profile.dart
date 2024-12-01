@@ -96,7 +96,7 @@ class _EditProfileState extends State<EditProfile> {
                       child: Text('Improve Endurance')),
                 ],
                 onChanged: (value) {
-                  // Manejar la selección del objetivo de entrenamiento
+                  
                 },
               ),
               const SizedBox(height: 20.0),
@@ -119,7 +119,7 @@ class _EditProfileState extends State<EditProfile> {
                   ),
                 ),
                 onPressed: () {
-                  // Acción para guardar los cambios del perfil
+                  
                   ScaffoldMessenger.of(context).showSnackBar(
                     const SnackBar(content: Text('Gym Profile updated')),
                   );

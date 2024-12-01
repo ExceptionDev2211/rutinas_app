@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:rutinas_app/models/db_model.dart';
+import 'package:rutinas_app/pages/routine_detail_screen.dart';
 import 'package:rutinas_app/providers/db_features.dart';
 
 class RutinesPage extends StatefulWidget {
@@ -51,19 +52,34 @@ class _RutinesPageState extends State<RutinesPage> {
     _loadCustomRoutines();
   }
 
+  String _getImageForRoutine(String routineTitle) {
+    const imagesMap = {
+      'Elevación de Piernas': 'assets/images/elevacion _de _piernas.gif',
+      'Crunches': 'assets/images/crunch_de_rodillas.gif',
+      'Tablón': 'assets/images/tablon.jpg',
+      'Crunches con Giro': 'assets/images/crunches_giro.gif',
+      'Tablón con Elevación de Piernas': 'assets/images/tablon_con_elevacion_de _piernas.gif',
+      'Crunches con Peso': 'assets/images/crunches_con peso.gif',
+      'Elevación de Piernas con Bola':'assets/images/elevacion_de_piernas_con_peso.gif'
+    };
+
+    return imagesMap[routineTitle] ?? 'assets/images/empty.jpg';
+  }
+
   List<Routine> _getPredefinedRoutines(String difficulty) {
     switch (difficulty) {
       case 'Principiante':
         return [
           Routine(
             title: 'Elevación de Piernas',
-            description: 'Acuéstate en el suelo y eleva las piernas rectas.',
+            description: 'Acuéstate en el suelo y eleva las piernas rectas. 3 series de 12 repeticiones',
             type: widget.routineName,
             difficulty: 'Principiante',
+            
           ),
           Routine(
             title: 'Crunches',
-            description: 'Acuéstate sobre la espalda con las piernas flexionadas y eleva el torso hacia las rodillas.',
+            description: 'Acuéstate sobre la espalda con las piernas flexionadas y eleva el torso hacia las rodillas. 3 series de 15 repeticiones',
             type: widget.routineName,
             difficulty: 'Principiante',
           ),
@@ -72,19 +88,19 @@ class _RutinesPageState extends State<RutinesPage> {
         return [
           Routine(
             title: 'Elevación de Piernas',
-            description: 'Acuéstate en el suelo y eleva las piernas rectas.',
+            description: 'Acuéstate en el suelo y eleva las piernas rectas. 4 series de 15 repeticiones',
             type: widget.routineName,
             difficulty: 'Intermedio',
           ),
           Routine(
             title: 'Tablón',
-            description: 'Mantén una posición de plancha con los codos y pies en el suelo.',
+            description: 'Mantén una posición de plancha con los codos y pies en el suelo. 3 series de 40 segundos',
             type: widget.routineName,
             difficulty: 'Intermedio',
           ),
           Routine(
             title: 'Crunches con Giro',
-            description: 'Realiza crunches mientras giras el torso hacia los lados.',
+            description: 'Realiza crunches mientras giras el torso hacia los lados. 4 series de 20 repeticiones',
             type: widget.routineName,
             difficulty: 'Intermedio',
           ),
@@ -92,20 +108,20 @@ class _RutinesPageState extends State<RutinesPage> {
       case 'Avanzado':
         return [
           Routine(
-            title: 'Elevación de Piernas con Pesas',
-            description: 'Acuéstate en el suelo y eleva las piernas con pesas en los tobillos.',
+            title: 'Elevación de Piernas con Bola',
+            description: 'Acuéstate en el suelo y eleva las piernas con una bola y pasala a tus brazos posteriormente regresala a tus piernas. 5 series de 12 repeticiones',
             type: widget.routineName,
             difficulty: 'Avanzado',
           ),
           Routine(
             title: 'Tablón con Elevación de Piernas',
-            description: 'Mantén una posición de plancha y eleva una pierna a la vez.',
+            description: 'Mantén una posición de plancha y eleva una pierna a la vez. 4 series de 30 segundos por pierna',
             type: widget.routineName,
             difficulty: 'Avanzado',
           ),
           Routine(
             title: 'Crunches con Peso',
-            description: 'Realiza crunches mientras sostienes un peso sobre el pecho.',
+            description: 'Realiza crunches mientras sostienes un peso sobre el pecho. 5 series de 15 repeticiones',
             type: widget.routineName,
             difficulty: 'Avanzado',
           ),
@@ -126,15 +142,37 @@ class _RutinesPageState extends State<RutinesPage> {
     return ListView(
       padding: const EdgeInsets.all(16),
       children: exercises.map((exercise) {
-        bool isPredefined = _getPredefinedRoutines(exercise.difficulty).any((predefined) => predefined.title == exercise.title);
+        bool isPredefined = _getPredefinedRoutines(exercise.difficulty)
+            .any((predefined) => predefined.title == exercise.title);
 
         return Card(
           margin: const EdgeInsets.symmetric(vertical: 8),
           child: ListTile(
+            leading: Image.asset(
+              _getImageForRoutine(exercise.title),
+              width: 50,
+              height: 50,
+              fit: BoxFit.cover,
+              errorBuilder: (context, error, stackTrace) => const Icon(Icons.image_not_supported),
+            ),
             title: Text(exercise.title),
             subtitle: Text(exercise.description),
-            trailing: isPredefined 
-                ? null 
+            onTap: () {
+              String imagePath = _getImageForRoutine(exercise.title);
+
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => RoutineDetailPage(
+                    title: exercise.title,
+                    description: exercise.description,
+                    imagePath: imagePath,
+                  ),
+                ),
+              );
+            },
+            trailing: isPredefined
+                ? null
                 : IconButton(
                     icon: const Icon(Icons.delete),
                     onPressed: () {
@@ -163,7 +201,7 @@ class _RutinesPageState extends State<RutinesPage> {
             ],
           ),
         ),
-        body: SingleChildScrollView( 
+        body: SingleChildScrollView(
           child: Column(
             children: [
               const Padding(
@@ -212,12 +250,11 @@ class _RutinesPageState extends State<RutinesPage> {
                 ),
               ),
               const SizedBox(height: 16),
-              ElevatedButton( 
+              ElevatedButton(
                 onPressed: _addCustomRoutine,
                 child: const Text('Agregar'),
               ),
               const SizedBox(height: 16),
-              
               SizedBox(
                 height: 400,
                 child: TabBarView(

@@ -189,14 +189,14 @@ class _CalendarScreenState extends State<CalendarScreen> {
   }
 
   void _showCustomNotificationMessage() {
-  if (!mounted) return; // Ensure the widget is still in the widget tree
+  if (!mounted) return; 
 
   setState(() {
     _showCustomNotification = true;
   });
 
   _notificationTimer = Timer(const Duration(seconds: 3), () {
-    if (!mounted) return; // Check again before calling setState
+    if (!mounted) return; 
 
     setState(() {
       _showCustomNotification = false;

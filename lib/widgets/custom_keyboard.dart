@@ -24,11 +24,11 @@ class _CustomKeyboardState extends State<CustomKeyboard> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 300, // Ajusta la altura del teclado
-      color: Colors.grey[200], // Color de fondo del teclado
+      height: 300, 
+      color: Colors.grey[200], 
       child: Column(
         children: [
-          // Fila para los botones de cambio entre letras, números y caracteres especiales
+          
           Container(
             padding: const EdgeInsets.symmetric(vertical: 4.0),
             child: Row(
@@ -47,7 +47,7 @@ class _CustomKeyboardState extends State<CustomKeyboard> {
                       minimumSize: const Size(double.infinity, 40),
                       padding: const EdgeInsets.symmetric(vertical: 0),
                       textStyle: const TextStyle(fontSize: 14),
-                      backgroundColor: Colors.grey[300], // Color de fondo del botón
+                      backgroundColor: Colors.grey[300], 
                     ),
                     child: const Icon(Icons.star, size: 20),
                   ),
@@ -66,7 +66,7 @@ class _CustomKeyboardState extends State<CustomKeyboard> {
                       minimumSize: const Size(double.infinity, 40),
                       padding: const EdgeInsets.symmetric(vertical: 0),
                       textStyle: const TextStyle(fontSize: 14),
-                      backgroundColor: Colors.grey[300], // Color de fondo del botón
+                      backgroundColor: Colors.grey[300], 
                     ),
                     child: Text(_isNumeric ? 'ABC' : '123'),
                   ),
@@ -77,12 +77,12 @@ class _CustomKeyboardState extends State<CustomKeyboard> {
                       setState(() {
                         _isUpperCase = !_isUpperCase;
                       });
-                    }, // Cambiar icono basado en el estado
+                    }, 
                     style: ElevatedButton.styleFrom(
                       minimumSize: const Size(double.infinity, 40),
                       padding: const EdgeInsets.symmetric(vertical: 0),
                       textStyle: const TextStyle(fontSize: 14),
-                      backgroundColor: Colors.grey[300], // Color de fondo del botón
+                      backgroundColor: Colors.grey[300], 
                     ),
                     child: Icon(_isUpperCase ? Icons.keyboard_capslock : Icons.keyboard),
                   ),
@@ -105,7 +105,7 @@ class _CustomKeyboardState extends State<CustomKeyboard> {
                     minimumSize: const Size(double.infinity, 40),
                     padding: const EdgeInsets.symmetric(vertical: 0),
                     textStyle: const TextStyle(fontSize: 14),
-                    backgroundColor: Colors.grey[300], // Color de fondo del botón
+                    backgroundColor: Colors.grey[300], 
                   ),
                   child: const Icon(Icons.backspace, size: 20),
                 ),
@@ -117,7 +117,7 @@ class _CustomKeyboardState extends State<CustomKeyboard> {
                     minimumSize: const Size(double.infinity, 40),
                     padding: const EdgeInsets.symmetric(vertical: 0),
                     textStyle: const TextStyle(fontSize: 14),
-                    backgroundColor: Colors.grey[300], // Color de fondo del botón
+                    backgroundColor: Colors.grey[300], 
                   ),
                   child: const Icon(Icons.arrow_forward, size: 20),
                 ),
@@ -139,7 +139,7 @@ class _CustomKeyboardState extends State<CustomKeyboard> {
       }
       keys.add(_buildKey('.'));
     } else if (_isSpecial) {
-      // Puedes añadir caracteres especiales aquí
+     
       const specialChars = ['!', '@', '#', '\$', '%', '^', '&', '*', '(', ')', '-', '=', '+'];
       for (var char in specialChars) {
         keys.add(_buildKey(char));
@@ -163,7 +163,7 @@ class _CustomKeyboardState extends State<CustomKeyboard> {
         minimumSize: const Size(30, 30), 
         padding: const EdgeInsets.all(0),
         textStyle: const TextStyle(fontSize: 14),
-        backgroundColor: Colors.grey[300], // Color de fondo del botón
+        backgroundColor: Colors.grey[300], 
       ),
       child: Text(label),
     );
